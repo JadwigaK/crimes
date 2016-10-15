@@ -21,10 +21,14 @@ public class Reader {
 
     public static Person readPerson() throws IOException {
         System.out.println("You are adding new person.");
-        Person person = personBuilder.setName(readName())
+        personBuilder.setName(readName())
                 .setSurname(readSurname()).setAge(readAge()).setAddress(readAddress())
-                .setSex(readSex()).setChild(readChildren()).setSomethingElse(readSomethingElse()).build();
-        return person;
+                .setSex(readSex()).setChildren(readChildren());
+                Map<String, String>  features = readFeature();
+                for(String s: features.keySet()){
+                    personBuilder.setFeature(s,features.get(s));
+                }
+        return personBuilder.build();
     }
 
     public  static String readName() throws IOException {
@@ -55,7 +59,7 @@ public class Reader {
         System.out.println("Sex? (female/male)");
         String in = bufferRead.readLine();
 
-        if (in.equals("female")) {
+        if ("female".equals(in)) {
             System.out.println("Maiden name?");
             String in1 = bufferRead.readLine();
             personBuilder.setMaidenName(in1);
@@ -73,10 +77,11 @@ public class Reader {
         return parsedChildren;
     }
 
-    public static String readSomethingElse() throws IOException {
-        System.out.println("Anything else? (height, weight, additional characteristic - separate by coma)");
+    public static Map<String, String> readFeature() throws IOException {
+        System.out.println("Anything else? (height, weight, additional characteristic - separate by coma without spaces)");
         String in = bufferRead.readLine();
-        return in;
+        Map<String, String> features = Parser.parseFeatures(in);
+        return features;
     }
 
 

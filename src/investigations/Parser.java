@@ -17,9 +17,9 @@ public class Parser {
         return output;
     }
 
-    public static Map<String,String> parseSomentingElse(String somethingElse) {
+    public static Map<String,String> parseFeatures(String features) {
         Map<String, String> output = new TreeMap<String,String>();
-        String[] separated = somethingElse.split(",");
+        String[] separated = features.split(",");
         for(String s: separated){
             output.put(s.split(" ")[0], s.split(" ")[1]);
         }

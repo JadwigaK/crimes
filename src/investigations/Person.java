@@ -12,17 +12,11 @@ public class Person {
     private String age;
     private String address;
 
-    private String sex ="";
-    private String maidenName="";
-
-
-    private String weight="";
-    private String height="";
-    private String additionalCharacteristic="";
+    private String sex;
+    private String maidenName;
 
     private Map<String,String> children = new HashMap<String, String>();
-
-    public Person() {}
+    private Map<String,String> features = new HashMap<String, String>();
 
     public Person(String name, String surname, String age, String address) {
         this.name = name;
@@ -31,39 +25,12 @@ public class Person {
         this.address = address;
     }
 
-
-    public void setName(String name) {
-        this.name=name;
-    }
-
-
-    public void setSurname(String surname) {
-        this.surname=surname;
-    }
-
-    public void setAge(String age) {
-        this.age=age;
-    }
-
-    public void setAddress(String address) {
-        this.address=address;
-    }
-
-    public void setWeight(String weight) {
-        this.weight=weight;
-    }
-
-
-    public void setHeight(String height) {
-        this.height =height;
-    }
-
-    public void setAdditionalCharacteristic(String addCh) {
-        this.additionalCharacteristic=addCh;
-    }
-
-    public void setChild(Map<String, String> children) {
+    public void setChildren(Map<String, String> children) {
         this.children =children;
+    }
+
+    public void setFeatures(Map<String, String> features) {
+        this.features = features;
     }
 
     public void setSex(String sex) {
@@ -75,48 +42,7 @@ public class Person {
     }
 
     public String toString(){
-        return "Person: "+ name +" "+ surname+" "+age+ " "+address+" "+sex+" "+ maidenName+" " +children + " " + weight + " "+ height + " "+ additionalCharacteristic;
+        return "Person: "+ name +" "+ surname+" "+age+ " "+address+" "+sex+" "+ maidenName+" " +children + " "+features;
     }
-
-    public String getWeight() {
-        return this.weight;
-    }
-
-    public String getHeight() {
-        return this.height;
-    }
-
-    public String getAdditionalCharacteristic() {
-        return this.additionalCharacteristic;
-    }
-
-    public String getSex() {
-        return this.sex;
-    }
-
-    public String getMaidenName() {
-        return this.maidenName;
-    }
-
-    public Map<String, String> getChildren(){
-        return this.children;
-    }
-
-    public String getName() {
-        return this.name;
-    }
-
-    public String getSurname() {
-        return this.surname;
-    }
-
-    public String getAge() {
-        return this.age;
-    }
-
-    public String getAddress() {
-        return this.address;
-    }
-
 
 }

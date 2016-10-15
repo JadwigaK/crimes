@@ -1,98 +1,96 @@
 package investigations;
 
+import java.util.HashMap;
 import java.util.Map;
 
 /**
  * Created by Jadwiga on 2016-10-12.
  */
 public class PersonBuilder {
-    private Person person = new Person();
+    private String name;
+    private String surname;
+    private String age;
+    private String address;
+
+    private String sex ="";
+    private String maidenName="";
+
+    private Map<String,String> children = new HashMap<String, String>();
+    private Map<String,String> features = new HashMap<String, String>();
 
     public PersonBuilder setName(String name){
-        person.setName(name);
+        if (name.equals("")){
+            throw new IllegalStateException("Name is required!");
+        }
+        this.name=name;
         return this;
     }
 
     public PersonBuilder setSurname(String surname){
-        person.setSurname(surname);
+        if (surname.equals("")){
+            throw new IllegalStateException("Surname is required!");
+        }
+        this.surname=surname;
         return this;
     }
 
     public PersonBuilder setAddress(String address) {
-        person.setAddress(address);
+        if (address.equals("")){
+            throw new IllegalStateException("Address is required!");
+        }
+        this.address=address;
         return this;
     }
 
     public PersonBuilder setAge(String age) {
-        person.setAge(age);
-        return this;
-    }
-
-    public PersonBuilder setSomethingElse(String something){
-        Map<String, String> parsedSomethingElse = Parser.parseSomentingElse(something);
-        for (String s : parsedSomethingElse.keySet()) {
-            if (s.equals("height")) {
-                this.setHeigh(parsedSomethingElse.get(s));
-            } else if (s.equals("weight")) {
-                this.setWeight(parsedSomethingElse.get(s));
-            } else if (s.equals("additional characteristic")) {
-                this.setAdditionalCharacteristic(parsedSomethingElse.get(s));
-            }
+        if (age.equals("")){
+            throw new IllegalStateException("Age is required!");
         }
+        this.age=age;
         return this;
     }
 
-
-
-    public PersonBuilder setWeight(String weight){
-        person.setWeight(weight);
-        return this;
-    }
-
-    public PersonBuilder setHeigh(String heigh){
-        person.setHeight(heigh);
-        return this;
-    }
-
-    public PersonBuilder setAdditionalCharacteristic(String addCh){
-        person.setAdditionalCharacteristic(addCh);
+    public PersonBuilder setFeature(String featureName, String featureValue){
+        this.features.put(featureName, featureValue);
         return this;
     }
 
     public PersonBuilder setSex(String sex){
-        person.setSex(sex);
+        this.sex=sex;
         return this;
     }
 
     public PersonBuilder setMaidenName(String maidenName) {
-        person.setMaidenName(maidenName);
+        if (sex.equals("male")){
+            throw new IllegalStateException("Man has not maiden name!!!");
+        }
+        this.maidenName=maidenName;
         return this;
     }
 
-    public PersonBuilder setChild(Map<String, String> children){
-        person.setChild(children);
+    public PersonBuilder setChildren(Map<String, String> children){
+        if (children.values().contains(null)){
+            throw new IllegalStateException("Provide age of all children!");
+        }
+        this.children=children;
         return this;
     }
 
     public Person build() {
-        Person personOut = new Person (person.getName(), person.getSurname(), person.getAge(), person.getAddress());
-        if (!person.getWeight().equals("")){
-            personOut.setWeight(person.getWeight());
+        Person personOut = new Person (name, surname, age, address);
+
+        if (!features.equals(null)) {
+            personOut.setFeatures(features);
         }
-        if (!person.getHeight().equals("")) {
-            personOut.setHeight(person.getHeight());
+
+        if (!sex.equals("")) {
+            personOut.setSex(sex);
         }
-        if (!person.getAdditionalCharacteristic().equals("")) {
-            personOut.setAdditionalCharacteristic(person.getAdditionalCharacteristic());
+        if (!maidenName.equals("")) {
+            personOut.setMaidenName(maidenName);
         }
-        if (!person.getSex().equals("")) {
-            personOut.setSex(person.getSex());
-        }
-        if (!person.getMaidenName().equals("")) {
-            personOut.setMaidenName(person.getMaidenName());
-        }
-        if (!person.getChildren().equals(null)) {
-            personOut.setChild(person.getChildren());
+        if (!children.equals(null)) {
+            personOut.setChildren(children);
         }
         return personOut;
     }
